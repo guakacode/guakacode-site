@@ -133,7 +133,7 @@ const ContactForm = () =>
         {/* reCAPTCHA */}
         <div className="flex justify-center">
           <ReCAPTCHA
-            sitekey="6LdYfpgrAAAAAEqHp_UJIhRXf1gsg-0gXphbNOxZ"
+            sitekey="6LfAgpgrAAAAAImSVXUvjVRLg20NHq7Y5M2JXk8v"
             onChange={handleRecaptchaChange}
             theme="light"
           />
@@ -143,8 +143,8 @@ const ContactForm = () =>
           type="submit"
           disabled={isSubmitting}
           className={`w-full px-6 py-3 rounded-md font-semibold transition-colors duration-200 focus:ring-2 focus:ring-brand focus:ring-offset-2 ${isSubmitting
-              ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-              : 'bg-brand text-white hover:bg-brand/90'
+            ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+            : 'bg-brand text-white hover:bg-brand/90'
             }`}
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}
@@ -152,8 +152,8 @@ const ContactForm = () =>
 
         {status && (
           <div className={`text-sm p-3 rounded-md ${status.includes('Thanks')
-              ? 'bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-200'
-              : 'bg-red-100 text-red-700 dark:bg-red-800 dark:text-red-200'
+            ? 'bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-200'
+            : 'bg-red-100 text-red-700 dark:bg-red-800 dark:text-red-200'
             }`}>
             {status}
           </div>
