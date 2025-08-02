@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 
-const ContactForm = () => {
+const ContactForm = () =>
+{
   const [status, setStatus] = useState('')
   const [recaptcha, setRecaptcha] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -11,15 +12,18 @@ const ContactForm = () => {
     message: ''
   })
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
+  {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) =>
+  {
     e.preventDefault()
 
-    if (!formData.name || !formData.email || !formData.message || !recaptcha) {
+    if (!formData.name || !formData.email || !formData.message || !recaptcha)
+    {
       setStatus('Please fill out all fields and complete the reCAPTCHA verification.')
       return
     }
@@ -27,7 +31,8 @@ const ContactForm = () => {
     setIsSubmitting(true)
     setStatus('')
 
-    try {
+    try
+    {
       // Create form data for Formspree
       const formDataToSend = new FormData()
       formDataToSend.append('name', formData.name)
@@ -44,26 +49,32 @@ const ContactForm = () => {
         }
       })
 
-      if (response.ok) {
+      if (response.ok)
+      {
         setStatus('Thanks! Your message has been sent successfully.')
         setFormData({ name: '', email: '', message: '' })
         setRecaptcha(null)
         // Reset reCAPTCHA
-        if (window.grecaptcha) {
+        if (window.grecaptcha)
+        {
           window.grecaptcha.reset()
         }
-      } else {
+      } else
+      {
         const errorData = await response.json()
         setStatus(`Error: ${errorData.error || 'Something went wrong. Please try again.'}`)
       }
-    } catch (error) {
+    } catch (error)
+    {
       setStatus('Network error. Please check your connection and try again.')
-    } finally {
+    } finally
+    {
       setIsSubmitting(false)
     }
   }
 
-  const handleRecaptchaChange = (value) => {
+  const handleRecaptchaChange = (value) =>
+  {
     setRecaptcha(value)
   }
 
@@ -86,7 +97,7 @@ const ContactForm = () => {
             className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-brand focus:border-transparent dark:bg-gray-700 dark:text-white"
           />
         </div>
-        
+
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Email
@@ -102,7 +113,7 @@ const ContactForm = () => {
             className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-brand focus:border-transparent dark:bg-gray-700 dark:text-white"
           />
         </div>
-        
+
         <div>
           <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Message
@@ -122,7 +133,7 @@ const ContactForm = () => {
         {/* reCAPTCHA */}
         <div className="flex justify-center">
           <ReCAPTCHA
-            sitekey="6LfSfpcrAAAAALYRXwAtLCf6QBlyYZGcanbRzeCd"
+            sitekey="6LdYfpgrAAAAAEqHp_UJIhRXf1gsg-0gXphbNOxZ"
             onChange={handleRecaptchaChange}
             theme="light"
           />
@@ -131,21 +142,19 @@ const ContactForm = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full px-6 py-3 rounded-md font-semibold transition-colors duration-200 focus:ring-2 focus:ring-brand focus:ring-offset-2 ${
-            isSubmitting 
-              ? 'bg-gray-400 text-gray-600 cursor-not-allowed' 
+          className={`w-full px-6 py-3 rounded-md font-semibold transition-colors duration-200 focus:ring-2 focus:ring-brand focus:ring-offset-2 ${isSubmitting
+              ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
               : 'bg-brand text-white hover:bg-brand/90'
-          }`}
+            }`}
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
 
         {status && (
-          <div className={`text-sm p-3 rounded-md ${
-            status.includes('Thanks') 
-              ? 'bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-200' 
+          <div className={`text-sm p-3 rounded-md ${status.includes('Thanks')
+              ? 'bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-200'
               : 'bg-red-100 text-red-700 dark:bg-red-800 dark:text-red-200'
-          }`}>
+            }`}>
             {status}
           </div>
         )}
